@@ -1,2 +1,3 @@
-# Desktop-application---Flight-Simulator-
-Desktop application (WPF) for controlling a Flight Simulator and receiving C&amp;C signals using MVVM architecture
+# Flight Simulator Desktop Application
+This project is a desktop application programmed in WPF for controlling a Flight Simulator ("FlightGear").
+The program recieves C&amp;C signals and its design is inspired by the MVVM architecture.
