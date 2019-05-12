@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="FlightSimulator.Views.ManualPilot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlightSimulator.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="500">
+    <DockPanel Background="White">
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" 
+                           Text="&#8592;aileron&#8594;"
+                           HorizontalAlignment="Center" 
+                           FontWeight="Bold" 
+                           Cursor="Arrow" 
+                           IsEnabled="False" />
+            <TextBlock Grid.Column="2" 
+                           Text="{Binding Ailron, StringFormat=N1}" 
+                           HorizontalAlignment="Left" 
+                           FontWeight="Bold" />
+        </Grid>
+        <Grid DockPanel.Dock="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Margin="0,50,0,0"
+                               Name="ElevatorValueText"  
+                               Text="{Binding Elevator, StringFormat= N1}"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Center" 
+                               FontWeight="Bold">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Grid.Row="1"
+                               Text="&#8592;elevator&#8594;" 
+                       Margin="0,0,0,100"
+                               RenderTransformOrigin="0.5,0.5" 
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" 
+                               FontWeight="Bold">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <Grid DockPanel.Dock="Left" Width="120">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                            Text="&#8592;throttle&#8594;"  
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"
+                                   RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="90"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <Grid VerticalAlignment="Center" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                        Text="{Binding ElementName=ThrottleSlider, Path=Value, StringFormat= G1}" 
+                           Margin="20"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Right" 
+                                   FontWeight="Bold" >
+                </TextBlock>
+                <Slider x:Name="ThrottleSlider"
+                                Grid.Row="1"
+                                Orientation="Vertical" 
+                                VerticalAlignment="Center"
+                                Value="{Binding Throttle}"
+                                Height="250"
+                                TickPlacement="BottomRight" 
+                                TickFrequency="0.1"
+                                Maximum="1" 
+                                Minimum="-1">
+                </Slider>
+            </Grid>
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Slider x:Name="RudderSlider"
+                        Grid.Row="0" 
+                        TickPlacement="BottomRight" 
+                        Value="{Binding Rudder}" 
+                        Width="250"
+                        TickFrequency="0.1" 
+                        HorizontalAlignment="Center" 
+                        Maximum="1"  
+                        Minimum="-1" />
+                <TextBlock Grid.Row="1"
+                    Text="{Binding ElementName=RudderSlider, Path=Value, StringFormat= G1}" 
+                           FontWeight="Bold" 
+                           Margin="0,0,-30,0"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment="Center" />
+            </Grid>
+            <TextBlock Grid.Row="1"
+                           Text="&#8592;rudder&#8594;"
+                           VerticalAlignment="Bottom"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center" />
+        </Grid>
+        <Grid>
+            <Viewbox>
+                <local:Joystick x:Name="Joystick"
+                                    MinWidth="340"
+                                    MinHeight="340"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" 
+                                    Aileron="{Binding Ailron, Mode=TwoWay}" 
+                                    Elevator="{Binding Elevator, Mode=TwoWay}" />
+            </Viewbox>
+        </Grid>
+    </DockPanel>
+</UserControl>
